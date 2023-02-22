@@ -3,10 +3,10 @@
 
 namespace Engine {
     std::string engineBackend() {
-        return "OpenGL";
+        return IMPLEMENTATION;
     }
 
-    class OpenGLImplWindow {
+    class IMPL(Window) {
     private:
         GLFWwindow* m_window;
         bool m_closed;
@@ -64,7 +64,7 @@ namespace Engine {
 
             glfwSetWindowUserPointer(m_window, this);
             glfwSetFramebufferSizeCallback(m_window, [](GLFWwindow* window, int width, int height) {
-                auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
+                auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
                 self->m_size.setX(width);
                 self->m_size.setY(height);
                 // if we do self->m_size = Vector2i(width, height); it will cause a heap corruption because of the way the Vector is implemented
@@ -72,18 +72,18 @@ namespace Engine {
             });
 
             glfwSetWindowPosCallback(m_window, [](GLFWwindow* window, int xpos, int ypos) {
-                auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
+                auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
                 self->m_position.setX(xpos);
                 self->m_position.setY(ypos);
             });
 
             glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window) {
-                auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
+                auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
                 self->m_closed = true;
             });
 
             glfwSetWindowFocusCallback(m_window, [](GLFWwindow* window, int focused) {
-                auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
+                auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
                 if (focused) {
                     glfwSetInputMode(window, GLFW_CURSOR, self->m_cursor ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
                 }
@@ -96,21 +96,21 @@ namespace Engine {
             });
 
             glfwSetWindowMaximizeCallback(m_window, [](GLFWwindow* window, int maximized) {
-                auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
+                auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
                 if (maximized) {
                     glfwSetInputMode(window, GLFW_CURSOR, self->m_cursor ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
                 }
             });
 
             glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height) {
-                auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
+                auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
                 self->m_size.setX(width);
                 self->m_size.setY(height);
                 glViewport(0, 0, width, height);
             });
 
             glfwSetWindowContentScaleCallback(m_window, [](GLFWwindow* window, float xscale, float yscale) {
-                auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
+                auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
                 self->m_size.setX(int(float(self->m_size.x()) * xscale));
                 self->m_size.setY(int(float(self->m_size.y()) * yscale));
                 glViewport(0, 0, self->m_size.x(), self->m_size.y());
@@ -118,7 +118,7 @@ namespace Engine {
         }
 
     public:
-        OpenGLImplWindow(Vector2i  size, std::string  title, bool resizable, bool fullscreen) :
+        IMPL(Window)(Vector2i  size, std::string  title, bool resizable, bool fullscreen) :
             m_size(std::move(size)),
             m_title(std::move(title)),
             m_resizable(resizable),
@@ -131,7 +131,7 @@ namespace Engine {
             m_vsync(true) {
             init();
         }
-        ~OpenGLImplWindow() {
+        ~IMPL(Window)() {
             destroy();
         }
 
@@ -212,14 +212,14 @@ namespace Engine {
     };
 
     Window::Window(const std::string& title, const Vector2i& size, bool resizable, bool fullscreen) {
-        m_impl = new OpenGLImplWindow(size, title, resizable, fullscreen);
+        m_impl = new IMPL(Window)(size, title, resizable, fullscreen);
     }
     Window::Window(const std::string& title, int width, int height, bool resizable, bool fullscreen) {
-        m_impl = new OpenGLImplWindow(Vector2i(width, height), title, resizable, fullscreen);
+        m_impl = new IMPL(Window)(Vector2i(width, height), title, resizable, fullscreen);
     }
 
-    OpenGLImplWindow* impl(Window* window) {
-        return reinterpret_cast<OpenGLImplWindow*>(window->getImplWindow());
+    IMPL(Window)* impl(Window* window) {
+        return reinterpret_cast<IMPL(Window)*>(window->getImplWindow());
     }
 
     Window::~Window() {
@@ -227,7 +227,7 @@ namespace Engine {
         delete impl(this);
     }
     void Window::update() {
-        OpenGLImplWindow::update();
+        IMPL(Window)::update();
     }
 
     void Window::clear() {

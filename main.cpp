@@ -1,26 +1,26 @@
 #include <iostream>
 #include <API/Window.h>
 #include <API/Shader.h>
-#include <ogl/oglHeader.h> // We can use our implementation directly for testing, but later on, we should only use the API
+#include <API/Renderer.h>
 
 int main() {
     std::cout << "Engine Using " << Engine::engineBackend() << std::endl;
     Engine::Window window("Engine", 800, 600);
     Engine::Shader shader("res/shaders/basic.vert", "res/shaders/basic.frag");
+    Engine::Renderer object; // test constructor
 
     while (!window.closed()) {
         window.update();
         window.clear();
+
+
         shader.bind();
 
-//        glColor3f(1.0f, 0.0f, 0.0f);
-//        glBegin(GL_TRIANGLES);
-//        glVertex2f(-0.5f, -0.5f);
-//        glVertex2f(0.0f, 0.5f);
-//        glVertex2f(0.5f, -0.5f);
-//        glEnd();
+        object.render();
 
         shader.unbind();
+
+
         window.render();
     }
 

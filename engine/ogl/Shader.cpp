@@ -2,7 +2,7 @@
 #include <API/Shader.h>
 
 namespace Engine {
-    class OpenGLImplShader {
+    class IMPL(Shader) {
     private:
         unsigned int m_shaderID;
 
@@ -43,13 +43,13 @@ namespace Engine {
 
     public:
 
-        OpenGLImplShader(const std::string& vertexShader, const std::string& fragmentShader) {
+        IMPL(Shader)(const std::string& vertexShader, const std::string& fragmentShader) {
             unsigned int vs = compileShader(vertexShader, GL_VERTEX_SHADER);
             unsigned int fs = compileShader(fragmentShader, GL_FRAGMENT_SHADER);
             m_shaderID = linkShader(vs, fs);
         }
 
-        ~OpenGLImplShader() {
+        ~IMPL(Shader)() {
             glDeleteProgram(m_shaderID);
         }
 
@@ -113,11 +113,11 @@ namespace Engine {
     Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) {
         std::string vertexShader = readFile(vertexShaderPath);
         std::string fragmentShader = readFile(fragmentShaderPath);
-        m_impl = new OpenGLImplShader(vertexShader, fragmentShader);
+        m_impl = new IMPL(Shader)(vertexShader, fragmentShader);
     }
 
-    OpenGLImplShader* impl(Shader* shader) {
-        return static_cast<OpenGLImplShader*>(shader->getImplShader());
+    IMPL(Shader)* impl(Shader* shader) {
+        return static_cast<IMPL(Shader)*>(shader->getImplShader());
     }
 
     Shader::~Shader() {

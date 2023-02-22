@@ -74,6 +74,8 @@ namespace Engine {
 
         Vector<T, N> operator/(T value) const;
 
+        Vector<T, N>& operator=(const Vector<T, N>& other);
+
         T &operator[](int index);
 
         T operator[](int index) const;

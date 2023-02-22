@@ -299,6 +299,12 @@ namespace Engine {
     }
 
     template<typename T, int N>
+    Vector<T, N>& Vector<T, N>::operator=(const Vector<T, N>& other) {
+        this->m_data = other.m_data;
+        return *this;
+    }
+
+    template<typename T, int N>
     T Vector<T, N>::lengthSquared() const {
         T result = 0;
         for (int i = 0; i < N; i++) {

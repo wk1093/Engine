@@ -5,3 +5,6 @@
 #include <GLFW/glfw3.h>
 
 #define ENGINE_BACKEND_OPENGL
+
+#define IMPL(x) OpenGLImpl##x
+#define IMPLEMENTATION "OpenGL"
