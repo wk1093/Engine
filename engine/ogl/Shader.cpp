@@ -107,6 +107,7 @@ namespace Engine {
         else {
             std::cout << "Could not open file " << fp << std::endl;
         }
+        return result;
     }
 
     Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) {

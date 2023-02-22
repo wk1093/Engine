@@ -24,9 +24,9 @@ namespace Engine {
                 std::cout << "Failed to initialize GLFW" << std::endl;
                 return;
             }
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // cant use glBegin/glEnd with this
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); // cant use glBegin/glEnd with this
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // cant use glBegin/glEnd with this
             glfwWindowHint(GLFW_RESIZABLE, m_resizable);
             glfwWindowHint(GLFW_DECORATED, !m_fullscreen);
             glfwWindowHint(GLFW_VISIBLE, !m_fullscreen);
