@@ -1,5 +1,5 @@
 #pragma once
-#include <API/engineHeader.h>
+#include "apiHeader.h"
 
 namespace Engine {
     template<typename T, int N>
@@ -82,7 +82,7 @@ namespace Engine {
 
         T get(int index) const;
 
-        void set(int index, T value);
+        void setAt(int index, T value);
 
         T *getPointer();
 
@@ -154,21 +154,14 @@ namespace Engine {
 // fix problems with the undefined reference to `Engine::Vector<int, 2>::Vector()'
 // and the undefined reference to `Engine::Vector<int, 2>::~Vector()'
 
-template class Engine::Vector<char, 2>;
-template class Engine::Vector<unsigned char, 2>;
-template class Engine::Vector<int, 2>;
-template class Engine::Vector<unsigned int, 2>;
-template class Engine::Vector<float, 2>;
-template class Engine::Vector<double, 2>;
-template class Engine::Vector<char, 3>;
-template class Engine::Vector<unsigned char, 3>;
-template class Engine::Vector<int, 3>;
-template class Engine::Vector<unsigned int, 3>;
-template class Engine::Vector<float, 3>;
-template class Engine::Vector<double, 3>;
-template class Engine::Vector<char, 4>;
-template class Engine::Vector<unsigned char, 4>;
-template class Engine::Vector<int, 4>;
-template class Engine::Vector<unsigned int, 4>;
-template class Engine::Vector<float, 4>;
-template class Engine::Vector<double, 4>;
+// only these versions can be used, and it isn't recommended to use the Vector class by itself
+// use the Vector2i, Vector2f, Vector3i, Vector3f, Vector4i, Vector4f, ... classes instead
+template class Engine::Vector<int, 2>; // Vector2i
+template class Engine::Vector<float, 2>; // Vector2f
+template class Engine::Vector<int, 3>; // Vector3i
+template class Engine::Vector<float, 3>; // Vector3f
+template class Engine::Vector<int, 4>; // Vector4i
+template class Engine::Vector<float, 4>; // Vector4f
+template class Engine::Vector<uint8_t, 4>; // Color
+// if any other versions are needed the user must declare them, or #include the Vector.cpp file
+

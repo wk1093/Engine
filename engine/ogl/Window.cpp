@@ -1,8 +1,6 @@
 #include "oglHeader.h"
 #include <API/Window.h>
 
-#include <utility>
-
 namespace Engine {
     std::string engineBackend() {
         return "OpenGL";
@@ -67,13 +65,16 @@ namespace Engine {
             glfwSetWindowUserPointer(m_window, this);
             glfwSetFramebufferSizeCallback(m_window, [](GLFWwindow* window, int width, int height) {
                 auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
-                self->m_size = Vector2i(width, height);
+                self->m_size.setX(width);
+                self->m_size.setY(height);
+                // if we do self->m_size = Vector2i(width, height); it will cause a heap corruption because of the way the Vector is implemented
                 glViewport(0, 0, width, height);
             });
 
             glfwSetWindowPosCallback(m_window, [](GLFWwindow* window, int xpos, int ypos) {
                 auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
-                self->m_position = Vector2i(xpos, ypos);
+                self->m_position.setX(xpos);
+                self->m_position.setY(ypos);
             });
 
             glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window) {
@@ -101,20 +102,17 @@ namespace Engine {
                 }
             });
 
-            glfwSetWindowRefreshCallback(m_window, [](GLFWwindow* window) {
-                auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
-                self->clear();
-            });
-
             glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height) {
                 auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
-                self->m_size = Vector2i(width, height);
+                self->m_size.setX(width);
+                self->m_size.setY(height);
                 glViewport(0, 0, width, height);
             });
 
             glfwSetWindowContentScaleCallback(m_window, [](GLFWwindow* window, float xscale, float yscale) {
                 auto* self = reinterpret_cast<OpenGLImplWindow*>(glfwGetWindowUserPointer(window));
-                self->m_size = Vector2i(int(float(self->m_size.x()) * xscale), int(float(self->m_size.y()) * yscale));
+                self->m_size.setX(int(float(self->m_size.x()) * xscale));
+                self->m_size.setY(int(float(self->m_size.y()) * yscale));
                 glViewport(0, 0, self->m_size.x(), self->m_size.y());
             });
         }
@@ -153,6 +151,7 @@ namespace Engine {
         }
         void destroy() {
             glfwDestroyWindow(m_window);
+            glfwTerminate();
         }
         bool shouldClose() {
             return glfwWindowShouldClose(m_window);
@@ -224,8 +223,8 @@ namespace Engine {
     }
 
     Window::~Window() {
+        impl(this)->destroy();
         delete impl(this);
-        glfwTerminate();
     }
     void Window::update() {
         OpenGLImplWindow::update();

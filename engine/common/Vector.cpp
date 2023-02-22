@@ -250,7 +250,7 @@ namespace Engine {
     }
 
     template<typename T, int N>
-    void Vector<T, N>::set(int index, T value) {
+    void Vector<T, N>::setAt(int index, T value) {
         m_data[index] = value;
     }
 

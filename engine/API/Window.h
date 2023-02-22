@@ -1,7 +1,7 @@
 #pragma once
-#include <API/engineHeader.h>
+#include "apiHeader.h"
 
-#include "Vector2i.h"
+#include "Vectors.h"
 #include "Color.h"
 
 /*
@@ -13,15 +13,17 @@
  *    // Draw stuff
  *    window.render();
  * }
+ *
+ * window.close();
  */
 
 namespace Engine {
     std::string engineBackend();
 
-    class Window {
+    class Window { // only one window is allowed at a time. (for now). This is because of the way the implementation is done.
     private:
         // pointer to an implementation of the window.
-        // This is used to make the window cross-platform/cross-backend.
+        // This is used to make the window cross-platform/cross-implementation.
         // The implementation is defined in the backend.
         void* m_impl;
 
