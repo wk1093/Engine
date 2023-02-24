@@ -53,11 +53,6 @@ namespace Engine {
 
             glBindVertexArray(vao);
 
-            for (auto vertex : m.vertices) {
-                OpenGLImplVertex* impl = implv(vertex);
-                std::cout << "VERTEX " << impl->pos.x() << ", " << impl->pos.y() << ", " << impl->pos.z() << std::endl;
-            }
-
             glVertexArray va = toGlArray(m.vertices);
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
             glBufferData(GL_ARRAY_BUFFER, va.len*(int)sizeof(float), va.arr, GL_STATIC_DRAW);

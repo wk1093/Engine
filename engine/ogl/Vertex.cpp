@@ -39,11 +39,11 @@ namespace Engine {
             }
 
             float* glVertex() {
-                return new float[] { pos.x(), pos.y(), pos.z(), (float)col.r()/255.0f, (float)col.g()/255.0f, (float)col.b()/255.0f, (float)col.a()/255.0f, tex.x(), tex.y() };
+                return new float[] { pos.x, pos.y, pos.z, (float)col.r()/255.0f, (float)col.g()/255.0f, (float)col.b()/255.0f, (float)col.a()/255.0f, tex.x, tex.y };
             }
 
             void print() {
-                printf("Vertex(%f,%f,%f, %i,%i,%i,%i, %f,%f)\n", pos.x(), pos.y(), pos.z(), col.r(), col.g(), col.b(), col.a(), tex.x(), tex.y());
+                printf("Vertex(%f,%f,%f, %i,%i,%i,%i, %f,%f)\n", pos.x, pos.y, pos.z, col.r(), col.g(), col.b(), col.a(), tex.x, tex.y);
             }
     };
 

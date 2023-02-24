@@ -48,7 +48,7 @@ namespace Engine {
             glfwWindowHint(GLFW_REFRESH_RATE, 60);
             glfwWindowHint(GLFW_SRGB_CAPABLE, true);
             glfwWindowHint(GLFW_DOUBLEBUFFER, true);
-            m_window = glfwCreateWindow(m_size.x(), m_size.y(), m_title.c_str(), nullptr, nullptr);
+            m_window = glfwCreateWindow((int)m_size.x, (int)m_size.y, m_title.c_str(), nullptr, nullptr);
             if (!m_window) {
                 std::cout << "Failed to create GLFW window" << std::endl;
                 glfwTerminate();
@@ -65,16 +65,16 @@ namespace Engine {
             glfwSetWindowUserPointer(m_window, this);
             glfwSetFramebufferSizeCallback(m_window, [](GLFWwindow* window, int width, int height) {
                 auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
-                self->m_size.setX(width);
-                self->m_size.setY(height);
+                self->m_size.x = float(width);
+                self->m_size.y = float(height);
                 // if we do self->m_size = Vector2i(width, height); it will cause a heap corruption because of the way the Vector is implemented
                 glViewport(0, 0, width, height);
             });
 
             glfwSetWindowPosCallback(m_window, [](GLFWwindow* window, int xpos, int ypos) {
                 auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
-                self->m_position.setX(xpos);
-                self->m_position.setY(ypos);
+                self->m_position.x = float(xpos);
+                self->m_position.y = float(ypos);
             });
 
             glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window) {
@@ -104,16 +104,16 @@ namespace Engine {
 
             glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height) {
                 auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
-                self->m_size.setX(width);
-                self->m_size.setY(height);
+                self->m_size.x = float(width);
+                self->m_size.y = float(height);
                 glViewport(0, 0, width, height);
             });
 
             glfwSetWindowContentScaleCallback(m_window, [](GLFWwindow* window, float xscale, float yscale) {
                 auto* self = reinterpret_cast<IMPL(Window)*>(glfwGetWindowUserPointer(window));
-                self->m_size.setX(int(float(self->m_size.x()) * xscale));
-                self->m_size.setY(int(float(self->m_size.y()) * yscale));
-                glViewport(0, 0, self->m_size.x(), self->m_size.y());
+                self->m_size.x = float(int(float(self->m_size.x) * xscale));
+                self->m_size.y = float(int(float(self->m_size.y) * yscale));
+                glViewport(0, 0, self->m_size.x, self->m_size.y);
             });
         }
 
@@ -167,11 +167,11 @@ namespace Engine {
         }
         void setSize(const Vector2i& size) {
             m_size = size;
-            glfwSetWindowSize(m_window, m_size.x(), m_size.y());
+            glfwSetWindowSize(m_window, m_size.x, m_size.y);
         }
         void setPosition(const Vector2i& position) {
             m_position = position;
-            glfwSetWindowPos(m_window, m_position.x(), m_position.y());
+            glfwSetWindowPos(m_window, m_position.x, m_position.y);
         }
         void setCursor(bool cursor) {
             m_cursor = cursor;
@@ -179,7 +179,7 @@ namespace Engine {
         }
         void setFullscreen(bool fullscreen) {
             m_fullscreen = fullscreen;
-            glfwSetWindowMonitor(m_window, m_fullscreen ? glfwGetPrimaryMonitor() : nullptr, 0, 0, m_size.x(), m_size.y(), 0);
+            glfwSetWindowMonitor(m_window, m_fullscreen ? glfwGetPrimaryMonitor() : nullptr, 0, 0, (int)m_size.x, (int)m_size.y, 0);
         }
         void setVsync(bool vsync) {
             m_vsync = vsync;

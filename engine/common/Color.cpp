@@ -1,44 +1,52 @@
 #include <API/Color.h>
 
 namespace Engine {
-    Color::Color() : Vector<uint8_t, 4>() {}
+    Color::Color() {cr = cg = cb = ca = 0;}
 
-    Color::Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a) : Vector<uint8_t, 4>(new uint8_t[] {r, g, b, a}) {}
+    Color::Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+        cr = r;
+        cg = g;
+        cb = b;
+        ca = a;
+    }
 
-    Color::Color(const Vector<uint8_t, 4> &v) : Vector<uint8_t, 4>(v) {}
-
-    Color::Color(const Color &c) : Vector<uint8_t, 4>(new uint8_t[] {c.r(), c.g(), c.b(), c.a()}) {}
+    Color::Color(const Color &c) {
+        cr = c.cr;
+        cg = c.cg;
+        cb = c.cb;
+        ca = c.ca;
+    }
 
     uint8_t Color::r() const {
-        return (*this)[0];
+        return cr;
     }
 
     uint8_t Color::g() const {
-        return (*this)[1];
+        return cg;
     }
 
     uint8_t Color::b() const {
-        return (*this)[2];
+        return cb;
     }
 
     uint8_t Color::a() const {
-        return (*this)[3];
+        return ca;
     }
 
     void Color::r(uint8_t r) {
-        (*this)[0] = r;
+        this->cr = r;
     }
 
     void Color::g(uint8_t g) {
-        (*this)[1] = g;
+        this->cg = g;
     }
 
     void Color::b(uint8_t b) {
-        (*this)[2] = b;
+        this->cb = b;
     }
 
     void Color::a(uint8_t a) {
-        (*this)[3] = a;
+        this->ca = a;
     }
 
     const Color Colors::Black = Color(0, 0, 0);

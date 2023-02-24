@@ -34,8 +34,6 @@ int main() {
     return 0;
 }
 
-
-// TODO: IMPORTANT: Remove vector temlate class, and use glm instead
 // TODO: Add a renderer class that will handle the rendering of objects using vertex arrays and vertex buffers
 // TODO: Add a texture class that will handle the loading of textures
 // TODO: Add a camera class that will handle the camera movement and projection matrix

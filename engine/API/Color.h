@@ -1,18 +1,17 @@
 #pragma once
 #include "apiHeader.h"
 
-#include "Vector.h"
 
 
 namespace Engine {
-    class Color : public Vector<uint8_t, 4> {
+    class Color {
+    private:
+        uint8_t cr, cg, cb, ca;
     public:
 
         Color();
 
         Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
-
-        explicit Color(const Vector<uint8_t, 4> &v);
 
         Color(const Color &c);
 
