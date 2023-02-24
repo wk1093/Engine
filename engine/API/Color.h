@@ -30,6 +30,8 @@ namespace Engine {
         void b(uint8_t b);
 
         void a(uint8_t a);
+
+        bool operator==(const Color &c) const;
     };
 
     class Colors {

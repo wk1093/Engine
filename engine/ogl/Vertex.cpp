@@ -66,6 +66,10 @@ namespace Engine {
         m_impl = new IMPL(Vertex)(pos, tex, col);
     }
 
+    bool Vertex::operator==(const Engine::Vertex &other) const {
+        return ((IMPL(Vertex)*)m_impl)->pos == ((IMPL(Vertex)*)other.m_impl)->pos && ((IMPL(Vertex)*)m_impl)->col == ((IMPL(Vertex)*)other.m_impl)->col && ((IMPL(Vertex)*)m_impl)->tex == ((IMPL(Vertex)*)other.m_impl)->tex;
+    }
+
     void *Vertex::getImplShader() {
         return m_impl;
     }

@@ -4,15 +4,18 @@
 #include <API/Renderer.h>
 #include <API/Meshes.h>
 
-#define VERTEX(x,y,z,r,g,b,a,u,v) Engine::Vertex(Engine::Vector3f(x,y,z),Engine::Vector2f(u,v),Engine::Color(r,g,b,a))
+using namespace Engine;
 
 int main() {
-    std::cout << "Engine Using " << Engine::engineBackend() << std::endl;
-    Engine::Window window("Engine", 800, 600);
-    Engine::Shader shader("res/shaders/basic.vert", "res/shaders/basic.frag");
-    Engine::Renderer object(Engine::Meshes::square(0, 0, 1.0, 1.0, Engine::Color(255, 0, 0)));
+    std::cout << engineBackend() << std::endl;
+    std::cout << "Loading mesh...";
+    Mesh spiral = Mesh("res/meshes/spiral.obj", Colors::Cyan);
 
-    // this example sometimes renders a square, but sometimes it renders a triangle that is part of the square, this happens because the vertex array is not being cleared before the next render call, this can be fixed by clearing the vertex array before the render call in the Renderer class
+    std::cout << " Done" << std::endl;
+
+    Window window("Engine", 800, 600);
+    Shader shader("res/shaders/basic.vert", "res/shaders/basic.frag");
+    Renderer object(spiral);
 
     while (!window.closed()) {
         window.update();
@@ -34,14 +37,14 @@ int main() {
     return 0;
 }
 
-// TODO: Add a renderer class that will handle the rendering of objects using vertex arrays and vertex buffers
+// TODO: Move implementations from mesh and meshes
+// TODO: NORMALS IN VERTICES
+// TODO: Add a mesh class that will handle the loading of meshes
 // TODO: Add a texture class that will handle the loading of textures
 // TODO: Add a camera class that will handle the camera movement and projection matrix
-// TODO: Add a mesh class that will handle the loading of meshes
 // TODO: Make the ECS
-// TODO: Easy way to render basic shapes without dealing with vertex arrays or shaders, built-in shaders
-// TODO: Vulkan backend
 // TODO: OpenGL ES backend
-// TODO: DirectX backend
 // TODO: WebGL backend
+// TODO: Vulkan backend
+// TODO: DirectX backend
 // TODO: Metal backend

@@ -49,6 +49,10 @@ namespace Engine {
         this->ca = a;
     }
 
+    bool Color::operator==(const Color &c) const {
+        return cr == c.cr && cg == c.cg && cb == c.cb && ca == c.ca;
+    }
+
     const Color Colors::Black = Color(0, 0, 0);
     const Color Colors::White = Color(255, 255, 255);
     const Color Colors::Red = Color(255, 0, 0);
