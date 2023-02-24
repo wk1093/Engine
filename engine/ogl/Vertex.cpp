@@ -3,12 +3,10 @@
 
 namespace Engine {
     class IMPL(Vertex) {
-            private:
+            public:
             Vector3f pos;
             Color col;
             Vector2f tex;
-
-            public:
 
             IMPL(Vertex)() {
                 pos = Vector3f(0, 0, 0);

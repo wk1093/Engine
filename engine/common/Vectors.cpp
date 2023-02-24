@@ -80,7 +80,7 @@ namespace Engine {
 
     Vector3f::Vector3f() : Vector<float, 3>() {}
 
-    Vector3f::Vector3f(float x, float y, float z) : Vector<float, 3>(new float[] {x, y, z}) {}
+    Vector3f::Vector3f(float x, float y, float z) : Vector<float, 3>({x, y, z}) {}
 
     Vector3f::Vector3f(float value) : Vector<float, 3>(new float[] {value, value, value}) {}
 

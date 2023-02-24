@@ -148,7 +148,7 @@ namespace Engine {
         smoothDamp(const Vector<T, N> &current, const Vector<T, N> &target, Vector<T, N> &currentVelocity, T smoothTime,
                    T maxSpeed);
 
-    private:
+    protected:
         T* m_data;
     };
 }

@@ -12,7 +12,7 @@ target_link_libraries(engine_common engine_api)
 
 add_subdirectory(engine/ogl) # OpenGL implementation (engine_oGL)
 
-add_executable(Engine main.cpp)
+add_executable(Engine main.cpp engine/API/Meshes.h)
 target_link_libraries(Engine engine_oGL) # here you can select which implementation to use
 
 
