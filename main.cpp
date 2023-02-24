@@ -39,7 +39,6 @@ int main() {
 
 // TODO: Move implementations from mesh and meshes
 // TODO: NORMALS IN VERTICES
-// TODO: Add a mesh class that will handle the loading of meshes
 // TODO: Add a texture class that will handle the loading of textures
 // TODO: Add a camera class that will handle the camera movement and projection matrix
 // TODO: Make the ECS

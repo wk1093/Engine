@@ -1,4 +1,4 @@
-add_library(engine_oGL STATIC Window.cpp oglHeader.h Shader.cpp Renderer.cpp VertexAttributeBuilder.h Vertex.cpp) # OpenGL implementation
+add_library(engine_oGL STATIC Window.cpp oglHeader.h Shader.cpp Renderer.cpp VertexAttributeBuilder.h) # OpenGL implementation
 FetchContent_Declare( GLFW GIT_REPOSITORY https://github.com/glfw/glfw GIT_TAG 3.3.4 )
 FetchContent_MakeAvailable(GLFW)
 FetchContent_Declare( glad GIT_REPOSITORY https://github.com/Dav1dde/glad.git GIT_TAG v0.1.34 )
@@ -8,7 +8,5 @@ if(NOT glad_POPULATED)
     set(GLAD_INSTALL ON)
     add_subdirectory( ${glad_SOURCE_DIR} ${glad_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
-FetchContent_Declare( glm GIT_REPOSITORY https://github.com/g-truc/glm.git GIT_TAG 0.9.9.8 )
-FetchContent_MakeAvailable(glm)
 find_package(OpenGL REQUIRED)
-target_link_libraries(engine_oGL glad glfw glm ${OPENGL_LIBRARIES} pthread engine_common)
+target_link_libraries(engine_oGL glad glfw ${OPENGL_LIBRARIES} pthread engine_common)

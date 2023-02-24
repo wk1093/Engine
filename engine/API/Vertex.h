@@ -5,10 +5,12 @@
 
 namespace Engine {
     class Vertex {
-    private:
-        void* m_impl;
-
     public:
+        Vector3f pos;
+        Vector2f tex;
+        Color col;
+        Vector3f norm;
+
         Vertex();
         explicit Vertex(const Vector3f& pos);
         Vertex(const Vector3f& pos, const Color& col);
@@ -18,8 +20,8 @@ namespace Engine {
 
         static int size();
 
-        bool operator==(const Vertex& other) const;
+        [[nodiscard]] float* glVertex() const;
 
-        void* getImplShader();
+        bool operator==(const Vertex& other) const;
     };
 }

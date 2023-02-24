@@ -2,14 +2,10 @@
 #include <API/Renderer.h>
 
 #include "VertexAttributeBuilder.h"
-#include "Vertex.cpp"
 
 #define VERTEX(x,y,z,r,g,b,a,u,v) Vertex(Vector3f(x,y,z),Vector2f(u,v),Color(r,g,b,a))
 
 namespace Engine {
-    IMPL(Vertex)* implv(Vertex v) {
-        return reinterpret_cast<IMPL(Vertex)*>(v.getImplShader());
-    }
 
     struct glVertexArray {
         float* arr;
@@ -23,7 +19,7 @@ namespace Engine {
     glVertexArray toGlArray(const std::vector<Vertex>& v) {
         auto* f = new float[v.size()*Vertex::size()];
         for (int i = 0; i < v.size(); i++) {
-            float* fs = implv(v[i])->glVertex();
+            float* fs = v[i].glVertex();
             for (int j = 0; j < Vertex::size(); j++) {
                 f[i*Vertex::size()+j] = fs[j];
             }
@@ -31,8 +27,6 @@ namespace Engine {
         return glVertexArray{f, int(v.size()*Vertex::size())};
     }
     glVertexElementArray toGlArray(const std::vector<unsigned int>& v) {
-//        std::vector<unsigned int> f = v;
-//        return glVertexElementArray{f.data(), (int)(f.size())};
         auto* f = new unsigned int[v.size()];
         for (int i = 0; i < v.size(); i++) {
             f[i] = v[i];
@@ -95,10 +89,10 @@ namespace Engine {
         }
 
         void render() {
-            //vab.enable();
+            vab.enable();
             glBindVertexArray(vao);
             glDrawElements(GL_TRIANGLES, (int)m.indices.size(), GL_UNSIGNED_INT, nullptr);
-            //vab.disable();
+            vab.disable();
         }
 
     };

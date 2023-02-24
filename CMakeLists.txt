@@ -6,9 +6,12 @@ include(FetchContent)
 
 include_directories(engine)
 
+FetchContent_Declare(glm GIT_REPOSITORY https://github.com/g-truc/glm.git GIT_TAG 0.9.9.8 )
+FetchContent_MakeAvailable(glm)
+
 add_library(engine_api INTERFACE engine/API/Window.h engine/API/Color.h engine/API/Shader.h engine/API/Vectors.h engine/API/Matrix.h engine/API/Matrices.h engine/API/Renderer.h engine/API/Mesh.h engine/API/Vertex.h)
-add_library(engine_common STATIC engine/common/Color.cpp engine/common/Matrix.cpp)
-target_link_libraries(engine_common engine_api)
+add_library(engine_common STATIC engine/common/Color.cpp engine/common/Matrix.cpp engine/common/Vertex.cpp)
+target_link_libraries(engine_common engine_api glm)
 
 add_subdirectory(engine/ogl) # OpenGL implementation (engine_oGL)
 
