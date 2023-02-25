@@ -113,14 +113,15 @@ namespace Engine {
     Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) {
         std::string vertexShader = readFile(vertexShaderPath);
         std::string fragmentShader = readFile(fragmentShaderPath);
-        std::cout << vertexShader << std::endl;
-        std::cout << fragmentShader << std::endl;
 
         m_impl = new IMPL(Shader)(vertexShader, fragmentShader);
     }
 
     Shader::Shader() {
-        m_impl = new IMPL(Shader)("res/shaders/basic.vert", "res/shaders/basic.frag");
+        std::string vertexShader = readFile("res/shaders/basic.vert");
+        std::string fragmentShader = readFile("res/shaders/basic.frag");
+
+        m_impl = new IMPL(Shader)(vertexShader, fragmentShader);
     }
 
     IMPL(Shader)* impl(Shader* shader) {

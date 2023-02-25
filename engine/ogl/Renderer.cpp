@@ -104,23 +104,36 @@ namespace Engine {
     Renderer::Renderer() {
         m_impl = new IMPL(Renderer)();
         m_shader = new Shader();
+        m_tf = Transform();
     }
 
     Renderer::Renderer(const Mesh& mesh, const std::string& texPath) {
         m_impl = new IMPL(Renderer)(mesh, texPath);
         m_shader = new Shader();
+        m_tf = Transform();
     }
 
-    Renderer::Renderer(const Mesh& mesh, Shader* shader) {
-        m_impl = new IMPL(Renderer)(mesh, "");
+    Renderer::Renderer(const Mesh& mesh, Shader* shader, const std::string& texPath) {
+        m_impl = new IMPL(Renderer)(mesh, texPath);
         m_shader = shader;
+        m_tf = Transform();
     }
 
     void Renderer::render() {
         m_shader->bind();
-        m_shader->setUniformMat4f("transform", Matrix4f());
+        m_shader->setUniformMat4f("transform", m_tf.getTransformationMatrix());
         implr(this)->render();
         m_shader->unbind();
+    }
+
+    void Renderer::move(const Vector3f& vec) {
+        m_tf.translate(vec);
+    }
+    void Renderer::rotate(const Vector3f& vec) {
+        m_tf.rotate(vec);
+    }
+    void Renderer::scale(const Vector3f& vec) {
+        m_tf.scale(vec);
     }
 
     void* Renderer::getImplRenderer() {

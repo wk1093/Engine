@@ -1,6 +1,5 @@
 #include <iostream>
 #include <API/Window.h>
-#include <API/Shader.h>
 #include <API/Renderer.h>
 #include <API/Meshes.h>
 
@@ -14,12 +13,14 @@ int main() {
     std::cout << " Done" << std::endl;
 
     Window window("Engine", 800, 600);
-    Shader shader("res/shaders/basic.vert", "res/shaders/basic.frag");
-    Renderer object(spiral, &shader);
+
+    Renderer object(spiral);
 
     while (!window.closed()) {
         window.update();
         window.clear();
+
+        object.rotate(Vector3f(0, 0, 0.01));
 
         object.render();
 
@@ -31,7 +32,7 @@ int main() {
     return 0;
 }
 
-// TODO: NORMALS IN VERTICES
+// TODO: Add 3d transformations
 // TODO: Add a texture class that will handle the loading of textures
 // TODO: Add a camera class that will handle the camera movement and projection matrix
 // TODO: Make the ECS
