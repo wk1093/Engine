@@ -10,7 +10,7 @@ FetchContent_Declare(glm GIT_REPOSITORY https://github.com/g-truc/glm.git GIT_TA
 FetchContent_MakeAvailable(glm)
 
 add_library(engine_api INTERFACE engine/API/Window.h engine/API/Color.h engine/API/Shader.h engine/API/Vectors.h engine/API/Matrices.h
-        engine/API/Renderer.h engine/API/Mesh.h engine/API/Vertex.h engine/API/Transform.h engine/API/Meshes.h)
+        engine/API/Renderer.h engine/API/Mesh.h engine/API/Vertex.h engine/API/Transform.h engine/API/Meshes.h engine/API/Time.h)
 add_library(engine_common STATIC engine/common/Color.cpp engine/common/Vertex.cpp engine/common/Mesh.cpp engine/common/Meshes.cpp engine/common/Transform.cpp)
 target_link_libraries(engine_common engine_api glm)
 

@@ -1,4 +1,4 @@
-add_library(engine_oGL STATIC Window.cpp oglHeader.h Shader.cpp Renderer.cpp VertexAttributeBuilder.h) # OpenGL implementation
+add_library(engine_oGL STATIC Window.cpp oglHeader.h Shader.cpp Renderer.cpp VertexAttributeBuilder.h Time.cpp) # OpenGL implementation
 FetchContent_Declare( GLFW GIT_REPOSITORY https://github.com/glfw/glfw GIT_TAG 3.3.4 )
 FetchContent_MakeAvailable(GLFW)
 FetchContent_Declare( glad GIT_REPOSITORY https://github.com/Dav1dde/glad.git GIT_TAG v0.1.34 )

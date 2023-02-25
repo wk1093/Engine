@@ -26,6 +26,10 @@ namespace Engine {
         void rotate(const Vector3f& vec);
         void scale(const Vector3f& vec);
 
+        void setPos(const Vector3f& vec);
+        void setRot(const Vector3f& vec);
+        void setScale(const Vector3f& vec);
+
         void* getImplRenderer();
     };
 }

@@ -7,27 +7,9 @@ namespace Engine {
     Transform::~Transform() = default;
 
     Matrix4f Transform::getTransformationMatrix() const {
-        Matrix4f translationMatrix = Matrix4f(
-            1, 0, 0, m_position.x,
-            0, 1, 0, m_position.y,
-            0, 0, 1, m_position.z,
-            0, 0, 0, 1
-        );
-
-        Matrix4f rotationMatrix = Matrix4f(
-            cos(m_rotation.y) * cos(m_rotation.z), cos(m_rotation.z) * sin(m_rotation.x) * sin(m_rotation.y) - cos(m_rotation.x) * sin(m_rotation.z), sin(m_rotation.x) * sin(m_rotation.z) + cos(m_rotation.x) * cos(m_rotation.z) * sin(m_rotation.y), 0,
-            cos(m_rotation.y) * sin(m_rotation.z), cos(m_rotation.x) * cos(m_rotation.z) + sin(m_rotation.x) * sin(m_rotation.y) * sin(m_rotation.z), cos(m_rotation.x) * sin(m_rotation.y) * sin(m_rotation.z) - cos(m_rotation.z) * sin(m_rotation.x), 0,
-            -sin(m_rotation.y), cos(m_rotation.y) * sin(m_rotation.x), cos(m_rotation.x) * cos(m_rotation.y), 0,
-            0, 0, 0, 1
-        );
-
-        Matrix4f scaleMatrix = Matrix4f(
-            m_scale.x, 0, 0, 0,
-            0, m_scale.y, 0, 0,
-            0, 0, m_scale.z, 0,
-            0, 0, 0, 1
-        );
-
+        Matrix4f translationMatrix = glm::translate(m_position);
+        Matrix4f rotationMatrix = glm::rotate(m_rotation.x, Vector3f(1, 0, 0)) * glm::rotate(m_rotation.y, Vector3f(0, 1, 0)) * glm::rotate(m_rotation.z, Vector3f(0, 0, 1));
+        Matrix4f scaleMatrix = glm::scale(m_scale);
         return translationMatrix * rotationMatrix * scaleMatrix;
     }
 

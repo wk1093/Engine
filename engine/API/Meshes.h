@@ -8,6 +8,6 @@ namespace Engine {
     class Meshes {
     public:
 
-        static Mesh square(float x, float y, float w, float h, const Color& color);
+        static Mesh square(const Color& color);
     };
 }

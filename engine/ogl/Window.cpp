@@ -213,6 +213,7 @@ namespace Engine {
 
     Window::Window(const std::string& title, const Vector2i& size, bool resizable, bool fullscreen) {
         m_impl = new IMPL(Window)(size, title, resizable, fullscreen);
+
     }
     Window::Window(const std::string& title, int width, int height, bool resizable, bool fullscreen) {
         m_impl = new IMPL(Window)(Vector2i(width, height), title, resizable, fullscreen);
@@ -227,7 +228,9 @@ namespace Engine {
         delete impl(this);
     }
     void Window::update() {
-        IMPL(Window)::update();
+        double cur = glfwGetTime();
+        mDt = cur - mTime;
+        mTime = cur;
     }
 
     void Window::clear() {
@@ -236,6 +239,7 @@ namespace Engine {
 
     void Window::render() {
         impl(this)->swapBuffers();
+        IMPL(Window)::update();
     }
 
     void Window::close() {

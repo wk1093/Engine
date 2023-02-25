@@ -125,16 +125,29 @@ namespace Engine {
         implr(this)->render();
         m_shader->unbind();
     }
+    Vector3f degToRad(const Vector3f& vec) {
+        return {vec.x*M_PI/180.0f, vec.y*M_PI/180.0f, vec.z*M_PI/180.0f};
+    }
 
     void Renderer::move(const Vector3f& vec) {
         m_tf.translate(vec);
     }
     void Renderer::rotate(const Vector3f& vec) {
-        m_tf.rotate(vec);
+        m_tf.rotate(degToRad(vec));
     }
     void Renderer::scale(const Vector3f& vec) {
         m_tf.scale(vec);
     }
+    void Renderer::setPos(const Vector3f& vec) {
+        m_tf.setPosition(vec);
+    }
+    void Renderer::setRot(const Vector3f& vec) {
+        m_tf.setRotation(degToRad(vec));
+    }
+    void Renderer::setScale(const Vector3f& vec) {
+        m_tf.setScale(vec);
+    }
+
 
     void* Renderer::getImplRenderer() {
         return m_impl;

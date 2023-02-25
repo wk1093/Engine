@@ -27,8 +27,10 @@ namespace Engine {
         // The implementation is defined in the backend.
         void* m_impl;
 
-
     public:
+        double mTime=0;
+        double mDt=0.01;
+
         Window(const std::string& title, int width, int height, bool resizable=true, bool fullscreen=false);
 
         Window(const std::string& title, const Vector2i& size, bool resizable=true, bool fullscreen=false);
