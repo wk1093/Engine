@@ -10,6 +10,7 @@ namespace Engine {
         void* m_impl; // implementation specific data
 
     public:
+        Shader();
         Shader(const std::string &vertexShaderPath, const std::string &fragmentShaderPath); // paths to glsl (OpenGL), hlsl (DirectX) or spirv (Vulkan) files
         ~Shader();
 

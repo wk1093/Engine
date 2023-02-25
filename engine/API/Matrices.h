@@ -1,8 +1,10 @@
 #pragma once
 #include "apiHeader.h"
-
-#include "Matrix.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Engine {
-    typedef Matrix<float, 4> Matrix4f;
+    typedef glm::mat4 Matrix4f;
+
+    using glm::value_ptr;
 }

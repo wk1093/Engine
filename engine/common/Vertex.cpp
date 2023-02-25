@@ -9,7 +9,18 @@ namespace Engine {
     Vertex::Vertex(const Vector3f& pos, const Vector2f& tex, const Vector3f& norm, const Color& col) : pos(pos), tex(tex), col(col), norm(norm) {}
 
     int Vertex::size() {
-        return 3 + 2 + 4 + 0; // posx, posy, posz, texx, texy, colr, colg, colb, cola, normx, normy, normz TODO: add normals
+        // sum
+        int sum = 0;
+        for (int i : glVertexSize()) {
+            sum += i;
+        }
+        return sum;
+    }
+
+    std::vector<int> Vertex::glVertexSize() {
+        return  {
+                3, 4, 2, 3 // pos, tes, col, norm
+        };
     }
 
     float* Vertex::glVertex() const {
@@ -17,7 +28,7 @@ namespace Engine {
                 pos.x, pos.y, pos.z,
                 (float)col.r()/255.0f, (float)col.g()/255.0f, (float)col.b()/255.0f, (float)col.a()/255.0f,
                 tex.x, tex.y,
-                //norm.x, norm.y, norm.z
+                norm.x, norm.y, norm.z
         };
     }
 

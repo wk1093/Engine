@@ -55,7 +55,7 @@ namespace Engine {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, vb.len*(int)sizeof(float), vb.arr, GL_STATIC_DRAW);
 
-            vab = VertexAttributeBuilder(3, 4, 2);
+            vab = VertexAttributeBuilder(Vertex::glVertexSize());
             vab.build();
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -86,7 +86,7 @@ namespace Engine {
             glUniform4f(glGetUniformLocation(m_shaderID, name.c_str()), vector.x, vector.y, vector.z, vector.w);
         }
         void setUniformMat4f(const std::string& name, Matrix4f matrix) const {
-            glUniformMatrix4fv(glGetUniformLocation(m_shaderID, name.c_str()), 1, GL_FALSE, matrix.elements());
+            glUniformMatrix4fv(glGetUniformLocation(m_shaderID, name.c_str()), 1, GL_FALSE, value_ptr(matrix));
         }
         void setUniformMat4f(const std::string& name, const float* matrix) const {
             glUniformMatrix4fv(glGetUniformLocation(m_shaderID, name.c_str()), 1, GL_FALSE, matrix);
@@ -113,7 +113,14 @@ namespace Engine {
     Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) {
         std::string vertexShader = readFile(vertexShaderPath);
         std::string fragmentShader = readFile(fragmentShaderPath);
+        std::cout << vertexShader << std::endl;
+        std::cout << fragmentShader << std::endl;
+
         m_impl = new IMPL(Shader)(vertexShader, fragmentShader);
+    }
+
+    Shader::Shader() {
+        m_impl = new IMPL(Shader)("res/shaders/basic.vert", "res/shaders/basic.frag");
     }
 
     IMPL(Shader)* impl(Shader* shader) {

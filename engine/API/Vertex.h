@@ -20,6 +20,8 @@ namespace Engine {
 
         static int size();
 
+        static std::vector<int> glVertexSize();
+
         [[nodiscard]] float* glVertex() const;
 
         bool operator==(const Vertex& other) const;

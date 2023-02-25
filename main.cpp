@@ -21,13 +21,9 @@ int main() {
         window.update();
         window.clear();
 
-
         shader.bind();
-
         object.render();
-
         shader.unbind();
-
 
         window.render();
     }
@@ -37,7 +33,6 @@ int main() {
     return 0;
 }
 
-// TODO: Move implementations from mesh and meshes
 // TODO: NORMALS IN VERTICES
 // TODO: Add a texture class that will handle the loading of textures
 // TODO: Add a camera class that will handle the camera movement and projection matrix
