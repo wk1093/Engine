@@ -15,15 +15,13 @@ int main() {
 
     Window window("Engine", 800, 600);
     Shader shader("res/shaders/basic.vert", "res/shaders/basic.frag");
-    Renderer object(spiral);
+    Renderer object(spiral, &shader);
 
     while (!window.closed()) {
         window.update();
         window.clear();
 
-        shader.bind();
         object.render();
-        shader.unbind();
 
         window.render();
     }
