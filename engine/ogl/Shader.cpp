@@ -127,9 +127,7 @@ namespace Engine {
         return static_cast<IMPL(Shader)*>(shader->getImplShader());
     }
 
-    Shader::~Shader() {
-        delete impl(this);
-    }
+    Shader::~Shader() = default;
 
     void Shader::bind() {
         impl(this)->bind();

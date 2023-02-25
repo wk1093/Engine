@@ -3,12 +3,8 @@
 namespace Engine {
     Transform::Transform() : m_position(Vector3f(0, 0, 0)), m_rotation(Vector3f(0, 0, 0)), m_scale(Vector3f(1, 1, 1)) {}
     Transform::Transform(const Vector3f &position, const Vector3f &rotation, const Vector3f &scale) : m_position(position), m_rotation(rotation), m_scale(scale) {}
-    Transform::Transform(const Transform &other) : m_position(other.m_position), m_rotation(other.m_rotation), m_scale(other.m_scale) {}
-    Transform::~Transform() {
-        delete &m_position;
-        delete &m_rotation;
-        delete &m_scale;
-    }
+    Transform::Transform(const Transform &other) = default;
+    Transform::~Transform() = default;
 
     Matrix4f Transform::getTransformationMatrix() const {
         Matrix4f translationMatrix = Matrix4f(
