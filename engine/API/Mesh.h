@@ -82,7 +82,7 @@ namespace Engine {
                             v = Vertex(positions[std::stoi(vs[0]) - 1], uvs[std::stoi(vs[1]) - 1], c);
                         }
                         if (n == 3) {
-                            v = Vertex(positions[std::stoi(vs[0]) - 1], uvs[std::stoi(vs[1]) - 1], c); // TODO: normals
+                            v = Vertex(positions[std::stoi(vs[0]) - 1], uvs[std::stoi(vs[1]) - 1], normals[std::stoi(vs[2]) - 1], c);
                         }
 
                         int index = -1;
